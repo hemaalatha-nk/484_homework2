@@ -8,40 +8,40 @@ import initialData from "../initial-data.json";
 // import {initial-data} from "../initial-data";
 
 function FeedbackScreen() {
-  // There maybe a need of defining state and passing them as props to components for enabling state sharing across components.
-  const [reqCompleted, setStatus] = useState<Array<number>>([]);
-  const [data, setData] = useState<Array<FormData>>(initialData);
+    // There maybe a need of defining state and passing them as props to components for enabling state sharing across components.
+    const [reqCompleted, setStatus] = useState<Array<number>>([]);
+    const [data, setData] = useState<Array<FormData>>(initialData);
 
-  return (
-    <>
-      <Nav />
-      <Routes>
-        <Route
-          path="/list"
-          element={
-            <RequestList
-              data={data}
-              setData={setData}
-              reqCompleted={reqCompleted}
-              setStatus={setStatus}
-            />
-          }
-        />
+    return (
+        <>
+            <Nav />
+            <Routes>
+                <Route
+                    path="/list"
+                    element={
+                        <RequestList
+                            data={data}
+                            setData={setData}
+                            reqCompleted={reqCompleted}
+                            setStatus={setStatus}
+                        />
+                    }
+                />
 
-        <Route
-          path="/add"
-          element={
-            <AddRequestForm
-              data={data}
-              setData={setData}
-              reqCompleted={reqCompleted}
-              setStatus={setStatus}
-            />
-          }
-        />
-      </Routes>
-    </>
-  );
+                <Route
+                    path="/add"
+                    element={
+                        <AddRequestForm
+                            data={data}
+                            setData={setData}
+                            reqCompleted={reqCompleted}
+                            setStatus={setStatus}
+                        />
+                    }
+                />
+            </Routes>
+        </>
+    );
 }
 
 export default FeedbackScreen;
