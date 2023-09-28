@@ -1,4 +1,4 @@
-import { RequestProps } from "../utils/types";
+import { RequestProps, RequestListProps, setstatus } from "../utils/types";
 
 // TODO:
 // Make the entire Component functional as per the requirements.
@@ -7,7 +7,10 @@ import { RequestProps } from "../utils/types";
 // However, You are free to create your own types, states, structure.
 // End goal is to make the component functional as per the requirements.
 
-function Request({ request, index, reqCompleted }: RequestProps) {
+// type setstatus = ({ index }: { index: number }) => void;
+
+
+function Request({ deleteData, status, request, index, reqCompleted }: RequestProps) {
   const isCompleted = reqCompleted.includes(index);
 
   return (
@@ -22,6 +25,7 @@ function Request({ request, index, reqCompleted }: RequestProps) {
           className="btn-close"
           aria-label="cancel"
           type="button"
+          onClick={() => deleteData({ index })}
         ></button>
       </td>
       <td>{request.name}</td>
@@ -29,7 +33,7 @@ function Request({ request, index, reqCompleted }: RequestProps) {
       <td>{request.emailId}</td>
       <td>{request.ldescription}</td>
       <td>
-        <button className="btn-primary btn" aria-label="complete" type="button">
+        <button className="btn-primary btn" aria-label="complete" type="button" onClick={() => status({ index })}>
           Complete
         </button>
       </td>
@@ -37,7 +41,20 @@ function Request({ request, index, reqCompleted }: RequestProps) {
   );
 }
 
-function RequestList() {
+function RequestList({ data, setData, reqCompleted, setStatus }: RequestListProps) {
+  console.log(data)
+  const logger: setstatus = (index) => {
+    console.log(index)
+    // setStatus([1])
+    setStatus(reqcompleted => [...reqcompleted, index.index])
+  };
+  const deleteData: setstatus = (index) => {
+    console.log(index)
+    let newArray = data.filter((e, i) => i !== index.index);
+    setData(newArray)
+    let reqCompletedlist = reqCompleted.filter((e, i) => e !== index.index);
+    setStatus(reqCompletedlist)
+  }
   return (
     <div className="list-container">
       <table className="table table-striped">
@@ -52,15 +69,21 @@ function RequestList() {
           </tr>
         </thead>
         <tbody id="main-table-body">
+
           {/* Put all of the requests here */}
           {/* Try leveraging the Request() already created for you */}
+          {data.map((request, index) => (<Request deleteData={deleteData} status={logger} request={request} index={index} reqCompleted={reqCompleted} />))}
+
+
         </tbody>
       </table>
     </div>
   );
 }
 
-function AddRequestForm() {
+function AddRequestForm({ data, setData, reqCompleted, setStatus }: RequestListProps) {
+  console.log(data)
+
   return (
     <div className="form-contain">
       <div>
@@ -109,10 +132,20 @@ function AddRequestForm() {
           type="button"
           className="btn btn-primary m-1"
           id="create-req-btn"
+          onClick={() => {
+            var form = document.querySelector('form')
+            console.log(form);
+            const fdata = new FormData(form!!);
+            console.log(fdata.get("name")?.toString(), fdata.get("emailId"), fdata.get("sdescription"), fdata.get("ldescription"))
+            setData(formdata => [...formdata, { name: fdata.get("name")!!.toString(), emailId: fdata.get("emailId")!!.toString(), ldescription: fdata.get("ldescription")!!.toString(), sdescription: fdata.get("sdescription")!!.toString() }])
+          }}
         >
           Create Request
         </button>
-        <button type="button" className="btn btn-danger m-1" id="reset-req-btn">
+        <button type="button" className="btn btn-danger m-1" id="reset-req-btn" onClick={() => {
+          var form = document.querySelector('form')
+          form!!.reset()
+        }}>
           Reset Form
         </button>
       </form>

@@ -13,6 +13,10 @@ function Landing() {
   // Required Functionality:
   // Reset every state to default.
   const createNewChat = () => {
+    setValue("")
+    setMessage("")
+    // setPreviousChats([])
+    setCurrentTitle(null)
     // Write code here
   };
 
@@ -23,6 +27,10 @@ function Landing() {
   // Reset the messsage and value state.
   const handleClick = (uniqueTitle: SetStateAction<string | null>) => {
     // Write code here
+    setCurrentTitle(uniqueTitle)
+    setMessage("")
+    setValue("")
+
   };
 
   // Function to generate a random sentence
@@ -51,6 +59,10 @@ function Landing() {
       // Call the function that generates a random sentence which return a value say "res"
       // Update the message state to this "res".
       // Write code here
+      // console.log("random message:", generateRandomSentence())
+      setMessage(generateRandomSentence())
+
+
     } catch (error) {
       console.error(error);
     }
@@ -71,6 +83,9 @@ function Landing() {
       // The object should be of following type for the 2nd object: {title: ABC, role: "Bot:", content: XYZ}
       // Replace ABC and XYZ with the associated titles and content for both User and Bot.
       // Write code here
+      console.log("msg: ", value, message)
+      setPreviousChats(oldChats => [...oldChats, { title: currentTitle, role: "User:", content: value }, { title: currentTitle, role: "Bot:", content: message }])
+
     }
     // eslint-disable-next-line
   }, [message, currentTitle]);
@@ -79,12 +94,16 @@ function Landing() {
   // Get the currentChat from the array of all previousChats in "const currentChat".
   // The currentChat is defined as all the previousChats with title == currentTitle.
 
+  const currentChat = previousChats.filter(element => element.title === currentTitle)
+
   // Write code here
 
   // TODO:
   // Get all the Array of "uniqueTitles".
   // The previousChat is an Array of <ChatMessage>. From this array fetch and create an array of all unique titles.
   // Set it to const uniqueTitle
+
+  const uniqueTitles = [...new Set(previousChats.map((element) => element.title))]
 
   // Write code here
 
@@ -103,7 +122,12 @@ function Landing() {
           */}
           {uniqueTitles?.map((uniqueTitle, index) => (
             // Write code here
-          ))}
+
+            <li key={index.toString()} onClick={() => handleClick(uniqueTitle)} >
+              {uniqueTitle}
+            </li>
+          ))
+          }
         </ul>
         <nav>
           <p>Baked for CS484 💝</p>
