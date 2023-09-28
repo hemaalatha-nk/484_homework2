@@ -47,6 +47,8 @@ describe("Testing Create and List Request Functionality -> 312 App", () => {
         expect(initialCellCount).toBe(6);
 
         const tableText = await tableBody.textContent();
+        
+        console.log("tableText",tableText)
         expect(tableText).toContain("Chris");
         expect(tableText).toContain("Saurav");
         expect(tableText).toContain("Feature");
