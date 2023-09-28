@@ -22,8 +22,8 @@ Note - Please do not override the `initial-data.json` data with some additional 
 
 Your code must function identically to the fully functional application.
 
-- For the landing component there are TODOs and expected behavious well commented for your reference.
-- For the feedback component, there are no TODO lines in the code - part of the challenge of this assignment is choosing where and how to save state in your application.
+-   For the landing component there are TODOs and expected behavious well commented for your reference.
+-   For the feedback component, there are no TODO lines in the code - part of the challenge of this assignment is choosing where and how to save state in your application.
 
 Deliverables -
 
@@ -36,7 +36,7 @@ Deliverables -
    When is page is loaded / reloaded, the default requests inside the `initial-data.json` should be displayed (i.e. the initial state given by `initial-data.json` should be restored). For example, when a user first loads the page the requests from initial-data.json should be displayed . Now if the user cancels a request, this request is deleted from the feedback request but if the user reloads the page, all
    the requests from the initial-data.json should be again displayed. This action only happens when a user reloads/loads the page. In case the user doesn't reload the page and switches tabs then the current state of the feedback requests should be displayed.
 
-- Please append the new request to the existing state (new requests added will be displayed below the previous requests).
+-   Please append the new request to the existing state (new requests added will be displayed below the previous requests).
 
 3. Add Requests tab contains a form to create feedback request. Please complete the functions for buttons `Create Request` and `Reset Form`. `Create Request` button should create a request and update the state ( feedback Requests ). After creating the feedback request, this feedback request should be displayed when you switch to the `List requests` tab ( without page reload ). `Reset form` button should clear the contents of the form.
 
