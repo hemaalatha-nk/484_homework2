@@ -11,7 +11,6 @@ import {
     createServiceRequest,
 } from "./testUtils";
 
-
 // To be called after every test to reset the Render of App Component
 beforeEach(() => {
     render(
