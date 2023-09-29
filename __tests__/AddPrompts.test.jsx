@@ -145,3 +145,6 @@ describe("Check the functionality of React GPT-484", () => {
         expect(foundItem).not.toBeUndefined();
     });
 });
+afterEach(() => {
+    cleanup();
+  });
